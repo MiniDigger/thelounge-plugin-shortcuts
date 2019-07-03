@@ -14,7 +14,8 @@ Simple plugin for the irc client [thelounge](https://thelounge.chat) that allows
 # Usage
 
 Adding a shortcut: `/shortcut add <from> <to>`, for example `/shortcut add j /join`.
-**Note: how you do need to add a `/` to the target, not doing so will just write `join` in the chat window**
+
+**Note: you do need to add a `/` to the target, not doing so will just write `join` in the chat window**
 
 Removing a shortcut: `/shortcut remove <name>`, for example `/shortcut remove j`.
 
