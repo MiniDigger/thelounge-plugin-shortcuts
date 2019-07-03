@@ -1,0 +1,12 @@
+{
+    "name": "thelounge-plugin-shortcuts",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/MiniDigger/thelounge-plugin-shortcuts.git",
+    "author": "MiniDigger <admin@minidigger.me>",
+    "license": "MIT",
+    "keywords": [
+        "thelounge",
+        "thelounge-plugin"
+    ]
+}
