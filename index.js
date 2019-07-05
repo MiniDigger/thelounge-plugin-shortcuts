@@ -117,10 +117,6 @@ const shortcutCommand = {
 };
 
 module.exports = {
-    thelounge: {
-        name: "Shortcuts",
-        type: "plugin"
-    },
     onServerStart: api => {
         thelounge = api;
         thelounge.Commands.add("shortcut", shortcutCommand);
