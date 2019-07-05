@@ -4,7 +4,6 @@ const Msg = require("thelounge/src/models/msg");
 
 let shortcuts = [];
 let thelounge = null; // TODO is there really no other way?
-addShortcut("test", "/whois MiniDigger");
 
 function sendMessage(text, chan, client) {
     chan.pushMessage(client.client, new Msg({
@@ -46,10 +45,20 @@ function saveShortcuts() {
     // TODO persist shortcuts
 }
 
+function loadShortcuts() {
+    // TODO persist shortcuts
+    addShortcut("test", "/whois MiniDigger");
+}
+
+function registerShortcuts() {
+    shortcuts.forEach(shortcut => thelounge.Commands.add(shortcut.from, runShortcut))
+}
+
 const runShortcut = {
     input: function (client, target, command, args) {
-        if (doesShortcutExist(cmd.name)) {
-            let to = getShortcut(cmd.name);
+        if (doesShortcutExist(command)) {
+            let to = getShortcut(command);
+            //sendMessage("Run shortcut " + command + " -> " + to + "", target.chan, client);
             client.runAsUser(to, target.chan.id);
         }
     }
@@ -120,5 +129,7 @@ module.exports = {
     onServerStart: api => {
         thelounge = api;
         thelounge.Commands.add("shortcut", shortcutCommand);
+        loadShortcuts();
+        registerShortcuts();
     }
 };
