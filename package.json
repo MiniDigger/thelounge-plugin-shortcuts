@@ -8,5 +8,12 @@
     "keywords": [
         "thelounge",
         "thelounge-plugin"
-    ]
+    ],
+    "thelounge": {
+        "name": "Shortcuts",
+        "type": "plugin"
+    },
+    "dependencies": {
+        "thelounge": "3.0.1"
+    }
 }
