@@ -56,9 +56,16 @@ function saveShortcuts() {
 function loadShortcuts() {
     fs.readFile(shortcutsFile, "utf-8", function (err, data) {
         if (err) log.error(err);
-        shortcuts = JSON.parse(data);
-        log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts");
-        registerShortcuts();
+        try {
+            shortcuts = JSON.parse(data);
+
+            shortcuts = JSON.parse(data);
+            log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts");
+            registerShortcuts();
+        } catch(error) {
+            log.error("Error while loading shortcuts: " + shortcuts);
+            saveShortcuts(); // TODO not sure if this is a good idea
+        }
     });
 }
 
