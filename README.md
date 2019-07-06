@@ -23,6 +23,12 @@ Listing all shortcuts: `/shortcut list`.
 
 Shortcuts are saved to `THELOUNGE_HOME/packages/shortcuts.json`
 
+# Examples
+
+`/shortcut add shrug ¯\_(ツ)_/¯` -> /shrug will send ¯\_(ツ)_/¯  
+`/shortcut add j /join` -> /j is an alias to /join  
+`/shortcut add jc /join #my-cool-channel #minidigger` -> /jc will join a bunch of channels  
+
 # Development
 
 Currently thelounge doesn't offer a way to install packages from source without npm, 
