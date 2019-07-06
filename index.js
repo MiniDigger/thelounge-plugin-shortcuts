@@ -61,7 +61,8 @@ const runShortcut = {
             //sendMessage("Run shortcut " + command + " -> " + to + "", target.chan, client);
             client.runAsUser(to, target.chan.id);
         }
-    }
+    },
+    allowDisconnected: true
 };
 
 const shortcutCommand = {
@@ -122,7 +123,8 @@ const shortcutCommand = {
                 sendErrorMessage("Usage: /shortcut <add|list|remove>", target.chan, client);
                 break;
         }
-    }
+    },
+    allowDisconnected: true
 };
 
 module.exports = {
@@ -131,5 +133,5 @@ module.exports = {
         thelounge.Commands.add("shortcut", shortcutCommand);
         loadShortcuts();
         registerShortcuts();
-    }
+    },
 };
