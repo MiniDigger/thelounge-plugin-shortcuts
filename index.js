@@ -1,9 +1,14 @@
 "use strict";
 
 const Msg = require("thelounge/src/models/msg");
+const log = require("thelounge/src/log");
+const fs = require("fs");
+const path = require('path');
+
+const shortcutsFile = path.resolve(process.env.THELOUNGE_HOME, "packages", "shortcuts.json");
 
 let shortcuts = [];
-let thelounge = null; // TODO is there really no other way?
+let thelounge = null;
 
 function sendMessage(text, chan, client) {
     chan.pushMessage(client.client, new Msg({
@@ -42,12 +47,19 @@ function getShortcut(from) {
 }
 
 function saveShortcuts() {
-    // TODO persist shortcuts
+    fs.writeFile(shortcutsFile, JSON.stringify(shortcuts), "utf-8", (err) => {
+        if (err) log.error(err);
+        log.info("Successfully wrote " + shortcuts.length + " shortcuts to file " + shortcutsFile);
+    });
 }
 
 function loadShortcuts() {
-    // TODO persist shortcuts
-    addShortcut("test", "/whois MiniDigger");
+    fs.readFile(shortcutsFile, "utf-8", function (err, data) {
+        if (err) log.error(err);
+        shortcuts = JSON.parse(data);
+        log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts");
+        registerShortcuts();
+    });
 }
 
 function registerShortcuts() {
@@ -60,6 +72,9 @@ const runShortcut = {
             let to = getShortcut(command);
             //sendMessage("Run shortcut " + command + " -> " + to + "", target.chan, client);
             client.runAsUser(to, target.chan.id);
+        } else {
+            sendErrorMessage("Did not find shortcut " + command + ", has it been removed? " +
+                "Removed shortcuts get unregistered on your next restart.", target.chan, client)
         }
     },
     allowDisconnected: true
@@ -92,7 +107,7 @@ const shortcutCommand = {
 
                 let to = args.slice(2).join(" ");
                 addShortcut(from, to);
-                thelounge.Commands.add(from, runShortcut); //TODO this doesn't work?
+                thelounge.Commands.add(from, runShortcut); //TODO this doesn't work for completion?
                 sendMessage("Shortcut " + from + " -> " + to + " added", target.chan, client);
                 break;
             case "list":
@@ -132,6 +147,5 @@ module.exports = {
         thelounge = api;
         thelounge.Commands.add("shortcut", shortcutCommand);
         loadShortcuts();
-        registerShortcuts();
     },
 };
