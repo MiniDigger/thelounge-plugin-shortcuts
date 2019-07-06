@@ -21,6 +21,8 @@ Removing a shortcut: `/shortcut remove <name>`, for example `/shortcut remove j`
 
 Listing all shortcuts: `/shortcut list`.
 
+Shortcuts are saved to `THELOUNGE_HOME/packages/shortcuts.json`
+
 # Development
 
 Currently thelounge doesn't offer a way to install packages from source without npm, 
