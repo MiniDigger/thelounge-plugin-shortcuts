@@ -7,6 +7,8 @@ const path = require('path');
 
 const shortcutsFile = path.resolve(process.env.THELOUNGE_HOME, "packages", "shortcuts.json");
 
+const code = "";
+
 let shortcuts = [];
 let thelounge = null;
 
@@ -76,11 +78,20 @@ function registerShortcuts() {
 const runShortcut = {
     input: function (client, target, command, args) {
         if (doesShortcutExist(command)) {
+            // get shortcut
             let to = getShortcut(command);
-            //sendMessage("Run shortcut " + command + " -> " + to + "", target.chan, client);
+
+            // replace placeholders
+            to = to.replace("{currentChannel}", target.chan.name);
+            to = to.replace("{args}", args.join(" "));
+            // handle positional arguments
+            args.forEach((arg, index) => to = to.replace("{" + index + "}", arg));
+
+            // run
+            // sendMessage("Run shortcut " + code + command + code +" -> " + code + to + code, target.chan, client);
             client.runAsUser(to, target.chan.id);
         } else {
-            sendErrorMessage("Did not find shortcut " + command + ", has it been removed? " +
+            sendErrorMessage("Did not find shortcut " + code + command + code +", has it been removed? " +
                 "Removed shortcuts get unregistered on your next restart.", target.chan, client)
         }
     },
@@ -107,7 +118,7 @@ const shortcutCommand = {
                         sendMessage("Removing old shortcut...", target.chan, client);
                         removeShortcut(from);
                     } else {
-                        sendErrorMessage("Shortcut " + from + " does exist, either remove the old one use use /shortuct addf <from> <to>", target.chan, client);
+                        sendErrorMessage("Shortcut "+ code + from + code + " does exist, either remove the old one use use " + code + "/shortcut addf <from> <to>" + code, target.chan, client);
                         return;
                     }
                 }
@@ -115,16 +126,16 @@ const shortcutCommand = {
                 let to = args.slice(2).join(" ");
                 addShortcut(from, to);
                 thelounge.Commands.add(from, runShortcut); //TODO this doesn't work for completion?
-                sendMessage("Shortcut " + from + " -> " + to + " added", target.chan, client);
+                sendMessage("Shortcut " + code + from + code + " -> " + code + to + code + " added", target.chan, client);
                 break;
             case "list":
                 if (shortcuts.length === 0) {
-                    sendErrorMessage("There are no shortcuts defined, use /shortcut add <from> <to> to add one.", target.chan, client);
+                    sendErrorMessage("There are no shortcuts defined, use "+ code +"/shortcut add <from> <to>" + code + " to add one.", target.chan, client);
                     return;
                 }
-                sendMessage("There are " + shortcuts.length + " shortcuts configured: ", target.chan, client);
+                sendMessage("There are " + code + shortcuts.length + code + " shortcuts configured: ", target.chan, client);
                 shortcuts.forEach(function (shortcut) {
-                    sendMessage("- /" + shortcut.from + " -> " + shortcut.to + "", target.chan, client);
+                    sendMessage("- " + code + "/" + shortcut.from + code +" -> " + code + shortcut.to + code, target.chan, client);
                 });
                 break;
             case "remove":
@@ -134,11 +145,11 @@ const shortcutCommand = {
                 }
 
                 if (!doesShortcutExist(args[1])) {
-                    sendErrorMessage("Shortcut " + args[1] + " does not exist", target.chan, client);
+                    sendErrorMessage("Shortcut " + code + args[1] + code + " does not exist", target.chan, client);
                 } else {
                     removeShortcut(args[1]);
                     //thelounge.Commands.remove(from); //TODO unregister command
-                    sendMessage("Shortcut " + args[1] + " has been removed", target.chan, client);
+                    sendMessage("Shortcut " + code + args[1] + code + " has been removed", target.chan, client);
                 }
                 break;
             default:

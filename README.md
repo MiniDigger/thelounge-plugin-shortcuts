@@ -23,11 +23,20 @@ Listing all shortcuts: `/shortcut list`.
 
 Shortcuts are saved to `THELOUNGE_HOME/packages/shortcuts.json`
 
+# Placeholders
+
+`thelounge-plugin-shortcuts` supports multiple placeholders:
+
+* `{currentChannel}` will be replaced with the name of the channel where the shortcut was executed in
+* `{0}`, `{1}`, `{n}` will be replaced with the first, second or nth argument that was entered after the shortcut
+* `{args}` will be replaced with all arguments which were entered after the shortcut
+
 # Examples
 
 `/shortcut add shrug ¯\_(ツ)_/¯` -> /shrug will send ¯\_(ツ)_/¯  
-`/shortcut add j /join` -> /j is an alias to /join  
-`/shortcut add jc /join #my-cool-channel #minidigger` -> /jc will join a bunch of channels  
+`/shortcut add j /join {args}` -> /j is an alias to /join  
+`/shortcut add jc /join #my-cool-channel` -> /jc will join a bunch of channels  
+`/shortcut add akick /msg chanserv akick {currentChannel} add {0} !T {1}` -> will akick SomeUser for 20 minutes
 
 # Development
 
