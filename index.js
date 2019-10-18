@@ -5,7 +5,7 @@ const log = require("thelounge/src/log");
 const fs = require("fs");
 const path = require('path');
 
-const shortcutsFile = path.resolve(process.env.THELOUNGE_HOME, "packages", "shortcuts.json");
+const shortcutsFile = path.resolve(Helper.getPackagesPath(), "shortcuts.json");
 
 const code = "";
 
