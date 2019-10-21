@@ -51,7 +51,8 @@ For that you need to have a package.json in that packages dir that looks kinda l
     "description": "Packages for The Lounge. All packages in node_modules directory will be automatically loaded.",
     "dependencies": {
         "thelounge-theme-mininapse": "2.0.15",
-        "thelounge-plugin-shortcuts": "1.0.1"
+        "thelounge-plugin-shortcuts": "1.0.1",
+        "thelounge-plugin-giphy": "1.0.1"
      }
 }
 ```
@@ -62,8 +63,8 @@ We then need to place our index.js and package.json in that dir.
 You can either do that manually by just copy pasting it, but that would involve copy pasting it for every change.
 I would recommend symlinking the files from the project into the packages folder, kinda like this:
 ```
-ln package.json thelounge-home/packages/node_modules/thelounge-plugin-shortcuts/package.json
-ln index.js thelounge-home/packages/node_modules/thelounge-plugin-shortcuts/index.js
+ln package.json ../thelounge-home/packages/node_modules/thelounge-plugin-shortcuts/package.json
+ln index.js ../thelounge-home/packages/node_modules/thelounge-plugin-shortcuts/index.js
 ```
 You can then just edit and commit the files in the project dir and restart thelounge
  on every change you do and the changes will be picked up.

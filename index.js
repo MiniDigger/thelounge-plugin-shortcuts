@@ -54,7 +54,7 @@ function getShortcut(from) {
 function saveShortcuts() {
     fs.writeFile(shortcutsFile, JSON.stringify(shortcuts), "utf-8", (err) => {
         if (err) log.error(err);
-        log.info("Successfully wrote " + shortcuts.length + " shortcuts to file " + shortcutsFile);
+        log.info("[Shortcuts] Successfully wrote " + shortcuts.length + " shortcuts to file " + shortcutsFile);
     });
 }
 
@@ -66,7 +66,7 @@ function loadShortcuts() {
             log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts from " + shortcutsFile);
             registerShortcuts();
         } catch(error) {
-            log.error("Error while loading shortcuts: " + shortcuts);
+            log.error("[Shortcuts] Error while loading shortcuts: " + shortcuts);
             saveShortcuts(); // TODO not sure if this is a good idea
         }
     });
