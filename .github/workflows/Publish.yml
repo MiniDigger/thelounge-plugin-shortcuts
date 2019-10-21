@@ -1,6 +1,7 @@
 name: Publish
 
-on: [tag]
+on:
+  create:
 
 jobs:
   publish:
