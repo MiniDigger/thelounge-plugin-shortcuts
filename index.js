@@ -2,9 +2,12 @@
 
 const Msg = require("thelounge/src/models/msg");
 const log = require("thelounge/src/log");
+const Helper = require("thelounge/src/helper");
+const Utils = require("thelounge/src/command-line/utils");
 const fs = require("fs");
 const path = require('path');
 
+Helper.setHome(process.env.THELOUNGE_HOME || Utils.defaultHome()); // TODO shouldn't be necessary...
 const shortcutsFile = path.resolve(Helper.getPackagesPath(), "shortcuts.json");
 
 const code = "";
@@ -60,9 +63,7 @@ function loadShortcuts() {
         if (err) log.error(err);
         try {
             shortcuts = JSON.parse(data);
-
-            shortcuts = JSON.parse(data);
-            log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts");
+            log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts from " + shortcutsFile);
             registerShortcuts();
         } catch(error) {
             log.error("Error while loading shortcuts: " + shortcuts);
