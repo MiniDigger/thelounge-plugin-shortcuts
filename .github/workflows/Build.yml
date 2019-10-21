@@ -5,7 +5,6 @@ on: [push, pull_request]
 jobs:
   build:
     name: Node ${{ matrix.node_version }} on ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
@@ -15,22 +14,17 @@ jobs:
         ]
 
     runs-on: ${{ matrix.os }}
-
     steps:
       - uses: actions/checkout@master
-
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
-
       - name: Install
         run: yarn --frozen-lockfile --non-interactive
-
-      - name: Build
-        run: yarn build
-        env:
-          NODE_ENV: production
-
-      - name: Test
-        run: yarn test
+#      - name: Build
+#        run: yarn build
+#        env:
+#          NODE_ENV: production
+#      - name: Test
+#        run: yarn test
