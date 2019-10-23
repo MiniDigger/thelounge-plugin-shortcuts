@@ -37,7 +37,7 @@ after@0.8.2:
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
   integrity sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=
 
-agent-base@^4.1.0:
+agent-base@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.3.0.tgz#8165f01c436009bccad0b1d122f05ed770efc6ee"
   integrity sha512-salcGninV0nPrwpGNn4VTXBb1SOuXQBiqbrNXoeizJsHrsL6ERFM2Ne3JUSBWRE6aeNJI2ROP/WEEIDUiDe3cg==
@@ -714,10 +714,10 @@ fast-text-encoding@^1.0.0:
   resolved "https://registry.yarnpkg.com/fast-text-encoding/-/fast-text-encoding-1.0.0.tgz#3e5ce8293409cfaa7177a71b9ca84e1b1e6f25ef"
   integrity sha512-R9bHCvweUxxwkDwhjav5vxpFvdPGlVngtqmx4pIZfSUhM/Q4NiIUHB456BAf+Q1Nwu3HEZYONtu+Rya+af4jiQ==
 
-file-type@12.3.0:
-  version "12.3.0"
-  resolved "https://registry.yarnpkg.com/file-type/-/file-type-12.3.0.tgz#74d755e5dc9c5cbc7ee6f182529b453906ac88c2"
-  integrity sha512-4E4Esq9KLwjYCY32E7qSmd0h7LefcniZHX+XcdJ4Wfx1uGJX7QCigiqw/U0yT7WOslm28yhxl87DJ0wHYv0RAA==
+file-type@12.3.1:
+  version "12.3.1"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-12.3.1.tgz#8a13bb49332295e5b02c2d6bba6a6a179bd5898c"
+  integrity sha512-FXxY5h6vSYMjrRal4YqbtfuoKD/oE0AMjJ7E5Hm+BdaQECcFVD03B41RAWYJ7wyuLr/wRnCtFo7y37l+nh+TAA==
 
 filename-reserved-regex@^2.0.0:
   version "2.0.0"
@@ -960,12 +960,12 @@ http_ece@1.1.0:
   dependencies:
     urlsafe-base64 "~1.0.0"
 
-https-proxy-agent@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.1.tgz#51552970fa04d723e04c56d04178c3f92592bbc0"
-  integrity sha512-HPCTS1LW51bcyMYbxUIOO4HEOlQ1/1qRaFWcyxvwaqUS9TY88aoEuHUY33kuAh1YhVVaDQhLZsnPd+XNARWZlQ==
+https-proxy-agent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-3.0.0.tgz#0106efa5d63d6d6f3ab87c999fa4877a3fd1ff97"
+  integrity sha512-y4jAxNEihqvBI5F3SaO2rtsjIOnnNA8sEbuiP+UhJZJHeM2NRm6c09ax2tgqme+SgUUvjao2fJXF4h3D6Cb2HQ==
   dependencies:
-    agent-base "^4.1.0"
+    agent-base "^4.3.0"
     debug "^3.1.0"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4:
@@ -1973,10 +1973,10 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-thelounge@3.3.0-rc.1:
-  version "3.3.0-rc.1"
-  resolved "https://registry.yarnpkg.com/thelounge/-/thelounge-3.3.0-rc.1.tgz#18cdf41050ebfa7904b9ab8efb7413805f27f0ca"
-  integrity sha512-+7dJrCQPtWeZi1BKrXAceweeOnS7XqvxOz3qjwgLOYEGaNqnHYFUQcqOad+jHMJAu72oLJ6Kk2CsG/w9mUXQog==
+thelounge@3.3.0-rc.2:
+  version "3.3.0-rc.2"
+  resolved "https://registry.yarnpkg.com/thelounge/-/thelounge-3.3.0-rc.2.tgz#455b316f027cb28f05a1102e12ac10cec337e449"
+  integrity sha512-QNFx3vGRQLIjipYQ8oZ07rlfBYfwUHRWA/htSxM6aQ7BXPRqWs58/YvjVTihbj5OMjzTKIXur/I1Rr4trqRqmg==
   dependencies:
     bcryptjs "2.4.3"
     busboy "0.3.1"
@@ -1984,7 +1984,7 @@ thelounge@3.3.0-rc.1:
     cheerio "0.22.0"
     commander "3.0.2"
     express "4.17.1"
-    file-type "12.3.0"
+    file-type "12.3.1"
     filenamify "4.1.0"
     fs-extra "8.1.0"
     got "9.6.0"
@@ -2002,7 +2002,7 @@ thelounge@3.3.0-rc.1:
     tlds "1.203.1"
     ua-parser-js "0.7.20"
     uuid "3.3.3"
-    web-push "3.4.0"
+    web-push "3.4.1"
     yarn "1.19.1"
   optionalDependencies:
     sqlite3 "4.1.0"
@@ -2142,14 +2142,14 @@ verror@1.10.0, verror@^1.8.1:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-web-push@3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.4.0.tgz#9611fb5976690e041ea60267aa39d3e83d78b59e"
-  integrity sha512-weFBdWDB9hLj8ZQLjmYotmU2VWAB9rRDTuFezJL3F3Dm/V56yZ03bCvS5n5qwHPkEZ71gOdcEDffbO/P5VdZHA==
+web-push@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.4.1.tgz#158268665ab45dd62d48e614388cf6130b548e39"
+  integrity sha512-wtx18llPtWWW+x8hv+Gxvz+2VjO+vZuyihInsjySNpNGNVswH1Bb2KkbbCtE96yi52VUmbFMdidxM8kJAPaSWQ==
   dependencies:
     asn1.js "^5.0.0"
     http_ece "1.1.0"
-    https-proxy-agent "^2.2.1"
+    https-proxy-agent "^3.0.0"
     jws "^3.1.3"
     minimist "^1.2.0"
     urlsafe-base64 "^1.0.0"
