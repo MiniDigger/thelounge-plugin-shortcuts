@@ -1973,10 +1973,10 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-thelounge@3.3.0-rc.2:
-  version "3.3.0-rc.2"
-  resolved "https://registry.yarnpkg.com/thelounge/-/thelounge-3.3.0-rc.2.tgz#455b316f027cb28f05a1102e12ac10cec337e449"
-  integrity sha512-QNFx3vGRQLIjipYQ8oZ07rlfBYfwUHRWA/htSxM6aQ7BXPRqWs58/YvjVTihbj5OMjzTKIXur/I1Rr4trqRqmg==
+thelounge@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/thelounge/-/thelounge-3.3.0.tgz#e17425be02fc3e261d8529a6aa4083ccc44aebd9"
+  integrity sha512-F7qYCmAkb/HPFxZfyKi/gEm24ZzjgUzJb+zI5I5u8b5PNJrfi9RwFb3cmE4pvF2Ft0QejR5O4khuX6DEFFxYDw==
   dependencies:
     bcryptjs "2.4.3"
     busboy "0.3.1"
