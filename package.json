@@ -23,6 +23,6 @@
         "type": "plugin"
     },
     "devDependencies": {
-        "thelounge": "^3.3.0"
+        "thelounge": "3.3.0"
     }
 }
