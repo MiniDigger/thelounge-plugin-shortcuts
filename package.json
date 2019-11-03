@@ -15,11 +15,14 @@
     "bugs": {
         "url": "https://github.com/MiniDigger/thelounge-plugin-shortcuts/issues"
     },
+    "scripts": {
+        "postversion": "git push --tags"
+    },
     "thelounge": {
         "name": "Shortcuts",
         "type": "plugin"
     },
     "devDependencies": {
-        "thelounge": "3.3.0"
+        "thelounge": "^3.3.0"
     }
 }
