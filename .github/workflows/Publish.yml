@@ -12,6 +12,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@master
+        with:
+          ref: master
         
       - name: Setup Node.js
         uses: actions/setup-node@v1
