@@ -12,8 +12,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@master
-        with:
-          ref: master
         
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -39,7 +37,7 @@ jobs:
           yarn version --new-version $version
           git add package.json
           git commit -m "Bump version to $version"
-          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
 
       - name: Publish
         run: yarn publish
