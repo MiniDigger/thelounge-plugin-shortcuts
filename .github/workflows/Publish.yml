@@ -1,21 +1,39 @@
 name: Publish
 
 on:
-  create:
-
+  release:
+    types: [published]
+    
 jobs:
   publish:
     name: Publish
+    
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@master
+        
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-          registry-url: https://registry.npmjs.org/
+          registry-url: "https://registry.npmjs.org/"
+
       - name: Install
         run: yarn --frozen-lockfile --non-interactive
+
+      - name: Setup GIT
+        run: |
+          git config user.email "admin@minidigger.me"
+          git config user.name "MiniDigger"
+
+      - name: Bump version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn version --new-version $GITHUB_REF
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+
       - name: Publish
         run: yarn publish
         env:
