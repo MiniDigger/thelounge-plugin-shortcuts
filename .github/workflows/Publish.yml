@@ -2,7 +2,7 @@ name: Publish
 
 on:
   release:
-    types: [created]
+    types: [published]
     
 jobs:
   publish:
@@ -22,10 +22,11 @@ jobs:
       - name: Install
         run: yarn --frozen-lockfile --non-interactive
 
-      - name: Setup GIT
+      - name: Setup git and yarn
         run: |
           git config user.email "admin@minidigger.me"
           git config user.name "MiniDigger"
+          yarn config set version-git-tag false
 
       - name: Bump version
         env:
@@ -34,7 +35,8 @@ jobs:
           version=$(echo "$GITHUB_REF" | sed "s/refs\/tags\/v//")
           echo "Bumping version to $version"
           yarn version --new-version $version
-          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" --tags
+          git commit -m "Bump version to $version"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
 
       - name: Publish
         run: yarn publish
