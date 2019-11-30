@@ -31,8 +31,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Bumping version to $GITHUB_REF"
-          yarn version --new-version $GITHUB_REF
+          version=$(echo "$GITHUB_REF" | sed "s/refs\/tags\/v//")
+          echo "Bumping version to $version"
+          yarn version --new-version $version
           git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
 
       - name: Publish
