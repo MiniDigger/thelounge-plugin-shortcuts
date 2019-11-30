@@ -35,6 +35,7 @@ jobs:
           version=$(echo "$GITHUB_REF" | sed "s/refs\/tags\/v//")
           echo "Bumping version to $version"
           yarn version --new-version $version
+          git add package.json
           git commit -m "Bump version to $version"
           git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
 
