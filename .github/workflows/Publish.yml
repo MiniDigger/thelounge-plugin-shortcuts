@@ -2,7 +2,7 @@ name: Publish
 
 on:
   release:
-    types: [published]
+    types: [created]
     
 jobs:
   publish:
@@ -34,7 +34,7 @@ jobs:
           version=$(echo "$GITHUB_REF" | sed "s/refs\/tags\/v//")
           echo "Bumping version to $version"
           yarn version --new-version $version
-          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" --tags
 
       - name: Publish
         run: yarn publish
