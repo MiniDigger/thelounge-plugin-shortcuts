@@ -152,6 +152,10 @@ module.exports = {
     onServerStart: api => {
         thelounge = api;
         thelounge.Commands.add("shortcut", shortcutCommand);
+        if(!fs.existsSync(shortcutsFile)) {
+            log.warn("Shortcut file " + shortcutsFile + " doesn't exist. Creating...")
+            saveShortcuts();
+        }
         loadShortcuts();
     },
 };
