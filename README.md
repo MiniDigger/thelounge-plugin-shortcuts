@@ -19,6 +19,8 @@ Adding a shortcut: `/shortcut add <from> <to>`, for example `/shortcut add j /jo
 
 Removing a shortcut: `/shortcut remove <name>`, for example `/shortcut remove j`.
 
+You may choose to have one shortcut run multiple commands. To do so, just add a second shortcut via `/shortcut addnext <from> <to>`.  
+
 Listing all shortcuts: `/shortcut list`.
 
 Shortcuts are saved to `THELOUNGE_HOME/packages/shortcuts.json`
