@@ -86,7 +86,7 @@ const runShortcut = {
             const to = getShortcut(command);
 
             // check if multiple or one shortcut
-            if(Array.isArray(to)) {
+            if (Array.isArray(to)) {
                 // iterate over all commands
                 to.forEach(entry => {
                     // handle placeholders and run
@@ -142,7 +142,7 @@ const shortcutCommand = {
                 client.sendMessage("Shortcut " + code + from + code + " -> " + code + to + code + " added", target.chan);
                 if (next) {
                     client.sendMessage("Whole shortcut now runs these commands: ", target.chan);
-                    const joined  = getShortcut(from).join(code + ", " + code);
+                    const joined = getShortcut(from).join(code + ", " + code);
                     client.sendMessage(code + joined + code, target.chan);
                 }
                 break;
@@ -154,8 +154,8 @@ const shortcutCommand = {
                 client.sendMessage("There are " + code + shortcuts.length + code + " shortcuts configured: ", target.chan);
                 shortcuts.forEach(function (shortcut) {
                     let to;
-                    if(Array.isArray(shortcut.to)) {
-                        const joined  = shortcut.to.join(code + ", " + code);
+                    if (Array.isArray(shortcut.to)) {
+                        const joined = shortcut.to.join(code + ", " + code);
                         to = code + joined + code;
                     } else {
                         to = code + shortcut.to + code

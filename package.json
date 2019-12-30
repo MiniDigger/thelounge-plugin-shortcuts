@@ -19,7 +19,7 @@
         "name": "Shortcuts",
         "type": "plugin"
     },
-    "devDependencies": {
+    "dependencies": {
         "thelounge": "3.3.0"
     }
 }
