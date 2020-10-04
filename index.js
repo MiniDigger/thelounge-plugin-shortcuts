@@ -99,7 +99,7 @@ const runShortcut = {
                 client.runAsUser(cmd, target.chan.id);
             }
         } else {
-            sendErrorMessage("Did not find shortcut " + code + command + code + ", has it been removed? " +
+            client.sendMessage(red + "Did not find shortcut " + code + command + code + ", has it been removed? " +
                 "Removed shortcuts get unregistered on your next restart.", target.chan, client)
         }
     },
@@ -148,7 +148,7 @@ const shortcutCommand = {
                 break;
             case "list":
                 if (shortcuts.length === 0) {
-                    client.sendErrorMessage(red + "There are no shortcuts defined, use " + code + "/shortcut add <from> <to>" + code + " to add one.", target.chan);
+                    client.sendMessage(red + "There are no shortcuts defined, use " + code + "/shortcut add <from> <to>" + code + " to add one.", target.chan);
                     return;
                 }
                 client.sendMessage("There are " + code + shortcuts.length + code + " shortcuts configured: ", target.chan);
