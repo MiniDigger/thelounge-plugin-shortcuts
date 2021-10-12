@@ -18,8 +18,5 @@
     "thelounge": {
         "name": "Shortcuts",
         "type": "plugin"
-    },
-    "dependencies": {
-        "thelounge": "4.2.0"
     }
 }
