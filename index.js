@@ -1,20 +1,14 @@
 "use strict";
 
-const Msg = require("thelounge/src/models/msg");
-const log = require("thelounge/src/log");
-const Helper = require("thelounge/src/helper");
-const Utils = require("thelounge/src/command-line/utils");
 const fs = require("fs");
 const path = require('path');
-
-Helper.setHome(process.env.THELOUNGE_HOME || Utils.defaultHome()); // TODO shouldn't be necessary...
-const shortcutsFile = path.resolve(Helper.getPackagesPath(), "shortcuts.json");
 
 const code = "";
 const red = '04';
 
 let shortcuts = [];
 let thelounge = null;
+let shortcutsFile = null;
 
 function addShortcut(from, to, next) {
     if (next && Array.isArray(getShortcut(from))) {
@@ -47,21 +41,21 @@ function getShortcut(from) {
 
 function saveShortcuts() {
     fs.writeFile(shortcutsFile, JSON.stringify(shortcuts), "utf-8", (err) => {
-        if (err) log.error(err);
-        log.info("[Shortcuts] Successfully wrote " + shortcuts.length + " shortcuts to file " + shortcutsFile);
+        if (err) thelounge.Logger.error(err);
+        thelounge.Logger.info("[Shortcuts] Successfully wrote " + shortcuts.length + " shortcuts to file " + shortcutsFile);
     });
 }
 
 function loadShortcuts() {
     fs.readFile(shortcutsFile, "utf-8", function (err, data) {
-        if (err) log.error(err);
+        if (err) thelounge.Logger.error(err);
         try {
             shortcuts = JSON.parse(data);
-            log.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts from " + shortcutsFile);
+            thelounge.Logger.info("[Shortcuts] Loaded " + shortcuts.length + " shortcuts from " + shortcutsFile);
             registerShortcuts();
         } catch (error) {
-            log.error("[Shortcuts] Error while loading shortcuts: " + shortcuts);
-            log.error(error);
+            thelounge.Logger.error("[Shortcuts] Error while loading shortcuts: " + shortcuts);
+            thelounge.Logger.error(error);
         }
     });
 }
@@ -189,9 +183,10 @@ const shortcutCommand = {
 module.exports = {
     onServerStart: api => {
         thelounge = api;
+        shortcutsFile = path.join(thelounge.Config.getPersistentStorageDir(), "shortcuts.json");
         thelounge.Commands.add("shortcut", shortcutCommand);
         if (!fs.existsSync(shortcutsFile)) {
-            log.warn("Shortcut file " + shortcutsFile + " doesn't exist. Creating...")
+            thelounge.Logger.warn("Shortcut file " + shortcutsFile + " doesn't exist. Creating...")
             saveShortcuts();
         }
         loadShortcuts();

@@ -1,25 +1,23 @@
 {
-    "name": "thelounge-plugin-shortcuts",
-    "version": "1.0.13",
-    "description": "Simple plugin for the irc client thelounge that allows you to register shortcuts/aliases for commands",
-    "main": "index.js",
-    "repository": "https://github.com/MiniDigger/thelounge-plugin-shortcuts.git",
-    "author": "MiniDigger <admin@minidigger.me>",
-    "homepage": "https://minidigger.github.io/thelounge-plugin-shortcuts",
-    "license": "MIT",
-    "keywords": [
-        "thelounge",
-        "thelounge-plugin",
-        "minidigger"
-    ],
-    "bugs": {
-        "url": "https://github.com/MiniDigger/thelounge-plugin-shortcuts/issues"
-    },
-    "thelounge": {
-        "name": "Shortcuts",
-        "type": "plugin"
-    },
-    "dependencies": {
-        "thelounge": "4.2.0"
-    }
+	"name": "thelounge-plugin-shortcuts",
+	"version": "1.0.13",
+	"description": "Simple plugin for the irc client thelounge that allows you to register shortcuts/aliases for commands",
+	"main": "index.js",
+	"repository": "https://github.com/MiniDigger/thelounge-plugin-shortcuts.git",
+	"author": "MiniDigger <admin@minidigger.me>",
+	"homepage": "https://minidigger.github.io/thelounge-plugin-shortcuts",
+	"license": "MIT",
+	"keywords": [
+		"thelounge",
+		"thelounge-plugin",
+		"minidigger"
+	],
+	"bugs": {
+		"url": "https://github.com/MiniDigger/thelounge-plugin-shortcuts/issues"
+	},
+	"thelounge": {
+		"name": "Shortcuts",
+		"type": "plugin",
+		"supports": ">=4.3.0"
+	}
 }
