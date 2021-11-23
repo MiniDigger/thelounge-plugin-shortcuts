@@ -20,6 +20,6 @@
         "type": "plugin"
     },
     "dependencies": {
-        "thelounge": "4.2.0"
+        "thelounge": "4.3.0"
     }
 }
