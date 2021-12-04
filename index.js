@@ -267,6 +267,27 @@ const shortcutCommand = {
 	allowDisconnected: true,
 };
 
+function copy_legacy_db(thelounge, new_path) {
+	// veeeery hacky, but here we go... problem being that we can't import TL, we'd get the "wrong"
+	// TL instance (our own rather than the running one)
+	// so we rely on the behavior TL had as of 4.3.0
+
+	if (fs.existsSync(new_path)) {
+		return;
+	}
+	// we are in $THELOUNGE_HOME/packages/node_modules/thelounge-plugin-shortcuts/
+	const packages_dir = path.resolve(path.join(__dirname, "..", ".."));
+	const old = path.join(packages_dir, "shortcuts.json");
+	try {
+		fs.copyFileSync(old, new_path);
+		thelounge.Logger.info(`copied old db from ${old} to ${new_path}`);
+	} catch (err) {
+		thelounge.Logger.warn(
+			`failed to copy old db from ${old} to ${new_path}: ${err}`
+		);
+	}
+}
+
 module.exports = {
 	onServerStart: (api) => {
 		thelounge = api;
@@ -274,6 +295,7 @@ module.exports = {
 			thelounge.Config.getPersistentStorageDir(),
 			"shortcuts.json"
 		);
+		copy_legacy_db(thelounge, shortcutsFile);
 		thelounge.Commands.add("shortcut", shortcutCommand);
 		if (!fs.existsSync(shortcutsFile)) {
 			thelounge.Logger.warn(
