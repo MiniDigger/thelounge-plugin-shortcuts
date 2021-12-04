@@ -24,7 +24,7 @@ function addShortcut(from, to, next) {
 }
 
 function removeShortcut(from) {
-	shortcuts = shortcuts.filter(function (shortcut, index, arr) {
+	shortcuts = shortcuts.filter(function (shortcut) {
 		return shortcut.from !== from;
 	});
 }
@@ -123,147 +123,145 @@ const runShortcut = {
 	allowDisconnected: true,
 };
 
-const shortcutCommand = {
-	input: function (client, target, command, args) {
-		if (args.length === 0) {
+function handleAdd(client, target, args) {
+	if (args.length <= 2) {
+		client.sendMessage(
+			red + "Usage: /shortcut " + args[0] + " <from> <to>",
+			target.chan
+		);
+		return;
+	}
+
+	const from = args[1];
+	let next = false;
+	if (doesShortcutExist(from)) {
+		if (args[0] === "addf") {
+			client.sendMessage("Removing old shortcut...", target.chan);
+			removeShortcut(from);
+		} else if (args[0] === "addnext") {
+			next = true;
+		} else {
 			client.sendMessage(
-				red + "Usage: /shortcut <add|list|remove>",
+				red +
+					"Shortcut " +
+					code +
+					from +
+					code +
+					" does exist, either remove the old one use use " +
+					code +
+					"/shortcut addf <from> <to>" +
+					code,
 				target.chan
 			);
+			client.sendMessage(
+				red +
+					"You can also use " +
+					code +
+					"/shortcut addnext <from> <to>" +
+					code +
+					" to add a new command to this existing shortcut",
+				target.chan
+			);
+			return;
+		}
+	}
+
+	const to = args.slice(2).join(" ");
+	addShortcut(from, to, next);
+	thelounge.Commands.add(from, runShortcut); //TODO this doesn't work for completion?
+	client.sendMessage(
+		"Shortcut " + code + from + code + " -> " + code + to + code + " added",
+		target.chan
+	);
+	if (next) {
+		client.sendMessage("Whole shortcut now runs these commands: ", target.chan);
+		const joined = getShortcut(from).join(code + ", " + code);
+		client.sendMessage(code + joined + code, target.chan);
+	}
+}
+
+function handleList(client, target) {
+	if (shortcuts.length === 0) {
+		client.sendMessage(
+			red +
+				"There are no shortcuts defined, use " +
+				code +
+				"/shortcut add <from> <to>" +
+				code +
+				" to add one.",
+			target.chan
+		);
+		return;
+	}
+	client.sendMessage(
+		"There are " + code + shortcuts.length + code + " shortcuts configured: ",
+		target.chan
+	);
+	shortcuts.forEach(function (shortcut) {
+		let to;
+		if (Array.isArray(shortcut.to)) {
+			const joined = shortcut.to.join(code + ", " + code);
+			to = code + joined + code;
+		} else {
+			to = code + shortcut.to + code;
+		}
+		client.sendMessage(
+			"- " + code + "/" + shortcut.from + code + " -> " + to,
+			target.chan
+		);
+	});
+}
+
+function handleRemove(client, target, args) {
+	if (args.length !== 2) {
+		client.sendMessage(red + "Usage: /shortcut remove <name>", target.chan);
+		return;
+	}
+
+	if (!doesShortcutExist(args[1])) {
+		client.sendMessage(
+			red + "Shortcut " + code + args[1] + code + " does not exist",
+			target.chan
+		);
+	} else {
+		removeShortcut(args[1]);
+		saveShortcuts();
+		//thelounge.Commands.remove(from); //TODO unregister command
+		client.sendMessage(
+			"Shortcut " + code + args[1] + code + " has been removed",
+			target.chan
+		);
+	}
+}
+
+function sendUsage(client, target) {
+	client.sendMessage(
+		red + "Usage: /shortcut <add{,f,next}|list|remove>",
+		target.chan
+	);
+}
+
+const shortcutCommand = {
+	input: function (client, target, _, args) {
+		if (args.length === 0) {
+			sendUsage(client, target);
 			return;
 		}
 		switch (args[0]) {
 			case "add":
 			case "addf":
 			case "addnext":
-				if (args.length <= 2) {
-					client.sendMessage(
-						red + "Usage: /shortcut " + args[0] + " <from> <to>",
-						target.chan
-					);
-					return;
-				}
-
-				const from = args[1];
-				let next = false;
-				if (doesShortcutExist(from)) {
-					if (args[0] === "addf") {
-						client.sendMessage("Removing old shortcut...", target.chan);
-						removeShortcut(from);
-					} else if (args[0] === "addnext") {
-						next = true;
-					} else {
-						client.sendMessage(
-							red +
-								"Shortcut " +
-								code +
-								from +
-								code +
-								" does exist, either remove the old one use use " +
-								code +
-								"/shortcut addf <from> <to>" +
-								code,
-							target.chan
-						);
-						client.sendMessage(
-							red +
-								"You can also use " +
-								code +
-								"/shortcut addnext <from> <to>" +
-								code +
-								" to add a new command to this existing shortcut",
-							target.chan
-						);
-						return;
-					}
-				}
-
-				const to = args.slice(2).join(" ");
-				addShortcut(from, to, next);
-				thelounge.Commands.add(from, runShortcut); //TODO this doesn't work for completion?
-				client.sendMessage(
-					"Shortcut " +
-						code +
-						from +
-						code +
-						" -> " +
-						code +
-						to +
-						code +
-						" added",
-					target.chan
-				);
-				if (next) {
-					client.sendMessage(
-						"Whole shortcut now runs these commands: ",
-						target.chan
-					);
-					const joined = getShortcut(from).join(code + ", " + code);
-					client.sendMessage(code + joined + code, target.chan);
-				}
-				break;
+				handleAdd(client, target, args);
+				return;
 			case "list":
-				if (shortcuts.length === 0) {
-					client.sendMessage(
-						red +
-							"There are no shortcuts defined, use " +
-							code +
-							"/shortcut add <from> <to>" +
-							code +
-							" to add one.",
-						target.chan
-					);
-					return;
-				}
-				client.sendMessage(
-					"There are " +
-						code +
-						shortcuts.length +
-						code +
-						" shortcuts configured: ",
-					target.chan
-				);
-				shortcuts.forEach(function (shortcut) {
-					let to;
-					if (Array.isArray(shortcut.to)) {
-						const joined = shortcut.to.join(code + ", " + code);
-						to = code + joined + code;
-					} else {
-						to = code + shortcut.to + code;
-					}
-					client.sendMessage(
-						"- " + code + "/" + shortcut.from + code + " -> " + to,
-						target.chan
-					);
-				});
-				break;
+				handleList(client, target);
+				return;
 			case "remove":
-				if (args.length !== 2) {
-					client.sendMessage(
-						red + "Usage: /shortcut remove <name>",
-						target.chan
-					);
-					return;
-				}
-
-				if (!doesShortcutExist(args[1])) {
-					client.sendMessage(
-						red + "Shortcut " + code + args[1] + code + " does not exist",
-						target.chan
-					);
-				} else {
-					removeShortcut(args[1]);
-					saveShortcuts();
-					//thelounge.Commands.remove(from); //TODO unregister command
-					client.sendMessage(
-						"Shortcut " + code + args[1] + code + " has been removed",
-						target.chan
-					);
-				}
-				break;
+				handleRemove(client, target, args);
+				return;
 			default:
-				client.sendMessage("Usage: /shortcut <add|list|remove>", target.chan);
-				break;
+				sendUsage(client, target);
+				return;
 		}
 	},
 	allowDisconnected: true,
