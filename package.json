@@ -1,6 +1,6 @@
 {
 	"name": "thelounge-plugin-shortcuts",
-	"version": "1.0.13",
+	"version": "1.1.1",
 	"description": "Simple plugin for the irc client thelounge that allows you to register shortcuts/aliases for commands",
 	"main": "index.js",
 	"repository": "https://github.com/MiniDigger/thelounge-plugin-shortcuts.git",

@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0
+## 1.1.1
 
 Use the new plugin API of thelounge.  
 Warning: this moves the shortcuts DB to a more appropriate place.
@@ -12,4 +12,3 @@ better error handling for loading of shortcuts
 ## 1.0.2
 
 first proper release
-
