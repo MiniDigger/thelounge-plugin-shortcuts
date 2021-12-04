@@ -10,6 +10,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         node_version: [
             12.x, # EOL: April 2022
+            16.x, # EOL: April 2024
           ]
 
     runs-on: ${{ matrix.os }}
