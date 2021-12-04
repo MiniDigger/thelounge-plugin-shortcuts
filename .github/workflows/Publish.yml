@@ -3,16 +3,16 @@ name: Publish
 on:
   release:
     types: [published]
-    
+
 jobs:
   publish:
     name: Publish
-    
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@master
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:

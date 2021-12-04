@@ -9,9 +9,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         node_version: [
-          10.x, # EOL: April 2021
-          12.x, # EOL: April 2022
-        ]
+            12.x, # EOL: April 2022
+          ]
 
     runs-on: ${{ matrix.os }}
     steps:
