@@ -1,28 +1,32 @@
 {
-	"name": "thelounge-plugin-shortcuts",
-	"version": "1.1.1",
-	"description": "Simple plugin for the irc client thelounge that allows you to register shortcuts/aliases for commands",
-	"main": "index.js",
-	"repository": "https://github.com/MiniDigger/thelounge-plugin-shortcuts.git",
-	"author": "MiniDigger <admin@minidigger.me>",
-	"homepage": "https://minidigger.github.io/thelounge-plugin-shortcuts",
-	"license": "MIT",
-	"keywords": [
-		"thelounge",
-		"thelounge-plugin",
-		"minidigger"
-	],
-	"bugs": {
-		"url": "https://github.com/MiniDigger/thelounge-plugin-shortcuts/issues"
-	},
-	"thelounge": {
-		"name": "Shortcuts",
-		"type": "plugin",
-		"supports": ">=4.3.0"
-	},
-	"devDependencies": {
-		"eslint": "^8.4.0",
-		"eslint-config-prettier": "^8.3.0",
-		"prettier": "^2.5.0"
-	}
+  "name": "thelounge-plugin-shortcuts",
+  "version": "1.1.1",
+  "description": "Simple plugin for the irc client thelounge that allows you to register shortcuts/aliases for commands",
+  "main": "index.js",
+  "repository": "https://github.com/MiniDigger/thelounge-plugin-shortcuts.git",
+  "author": "MiniDigger <admin@minidigger.me>",
+  "homepage": "https://minidigger.github.io/thelounge-plugin-shortcuts",
+  "license": "MIT",
+  "keywords": [
+    "thelounge",
+    "thelounge-plugin",
+    "minidigger"
+  ],
+  "bugs": {
+    "url": "https://github.com/MiniDigger/thelounge-plugin-shortcuts/issues"
+  },
+  "thelounge": {
+    "name": "Shortcuts",
+    "type": "plugin",
+    "supports": ">=4.3.0"
+  },
+  "scripts": {
+    "format": "prettier -w .",
+    "lint": "eslint --ext \".js,.vue,.ts,.html\" --ignore-path .gitignore --fix ."
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.2"
+  }
 }
