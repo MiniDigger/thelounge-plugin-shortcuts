@@ -25,7 +25,7 @@
     "lint": "eslint --ext \".js,.vue,.ts,.html\" --ignore-path .gitignore --fix ."
   },
   "devDependencies": {
-    "eslint": "^8.47.0",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.2"
   }
